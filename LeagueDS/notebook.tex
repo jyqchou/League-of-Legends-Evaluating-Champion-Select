@@ -1,0 +1,1232 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{League of Legends - Predicting Wins from Champions Selected}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    Justin Chou 156006871
+
+    \section{Project Description}\label{project-description}
+
+    League of Legends (LoL) is an increasingly popular e-sport for both the
+gamer and the spectator. Each game brings together ten human players,
+each on different champions (playable characters), who purchase
+different items and cast different available spells in game. While most
+of the game is spent battling on the rift (``playing'' the actual game),
+there is still much strategizing to be done before the game even starts
+-- that is selecting which champions to play. Since there are a total of
+140 champions and games consist of 5 players vs. 5 players, in total
+there are
+\(\dfrac{{140 \choose 5} * {135 \choose 5}}{2} = 7.22*10^{16}\) unique
+possible games with respect to the possible combinations of champions
+for each team (no duplicate champions in a game). I believe this aspect
+of the game is worth investigating as the composition of teams
+fundamentally layout how the game will play out. Each champion has its
+own advantages, disadvantages, and synergies with other champions, so
+naturally, before the game starts, the probability of one team winning
+over the other should not be \(50\%\). Thus, with previously played
+games as data, ideally one should be able to train a model that is
+capable of predicting the winning team based on the selected champions
+to a certain degree of accuracy, as there are other factors like
+individual player skill not taken into consideration.
+
+    \section{Data Collection}\label{data-collection}
+
+    My main goal was to collect large amounts of data on played league games
+-- specifically, what champions are being played on each team, as well
+as which team wins. Fortunately, Riot Games supports an API for League
+of Legends at https://developer.riotgames.com/. Since the API does not
+store any universal list of all matches played, I had to collect data by
+crawling through matches. The main API method I use is MATCH-V3, which
+can return a list of matches played given an accountId parameter, and
+can also return details of a match given a matchId. I first collected
+the a list of matches played by one known account. I began with my
+personal account. I then collected the players in these matches,
+recorded their match histories, and repeated the process for these new
+players. Riot's API enforces a rate limit of 100 requests per 2 minutes,
+so I had to adjust my request rate accordingly. In the end, I was able
+to collect data for about 34,000 games, with approximately 360
+duplicated rows that were ultimately removed. Below are the methods that
+scraped Riot's API to gather the data.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{}See Main.py for full data scraping code \PYZam{} dependencies including RiotAPI}
+        \PY{c+c1}{\PYZsh{}API key needs to be updated}
+        
+        \PY{k+kn}{import} \PY{n+nn}{csv}
+        \PY{k+kn}{import} \PY{n+nn}{random}
+        \PY{k+kn}{import} \PY{n+nn}{time}
+        \PY{k+kn}{from} \PY{n+nn}{RiotAPI} \PY{k}{import} \PY{n}{RiotAPI}
+        
+        \PY{k}{def} \PY{n+nf}{main}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+            \PY{n}{api\PYZus{}key}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{RGAPI\PYZhy{}f2907155\PYZhy{}7488\PYZhy{}4446\PYZhy{}9b9c\PYZhy{}ef8332e10674}\PY{l+s+s1}{\PYZsq{}}
+            \PY{c+c1}{\PYZsh{}collect\PYZus{}champions(api\PYZus{}key)}
+            \PY{n}{scrape\PYZus{}match\PYZus{}data}\PY{p}{(}\PY{n}{api\PYZus{}key}\PY{p}{)}
+        
+        \PY{k}{def} \PY{n+nf}{collect\PYZus{}champions}\PY{p}{(}\PY{n}{api\PYZus{}key}\PY{p}{)}\PY{p}{:}
+            \PY{n}{csvfile} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{champions\PYZus{}data.csv}\PY{l+s+s1}{\PYZsq{}}
+            \PY{n}{output} \PY{o}{=} \PY{n+nb}{open}\PY{p}{(}\PY{n}{csvfile}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{api} \PY{o}{=} \PY{n}{RiotAPI}\PY{p}{(}\PY{n}{api\PYZus{}key}\PY{p}{)}
+            \PY{n}{r} \PY{o}{=} \PY{n}{api}\PY{o}{.}\PY{n}{get\PYZus{}champion\PYZus{}list}\PY{p}{(}\PY{p}{)}
+            \PY{k}{while} \PY{n}{r} \PY{o+ow}{is} \PY{k+kc}{None} \PY{o+ow}{or} \PY{n}{r}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{o+ow}{is} \PY{k+kc}{None}    \PY{p}{:}
+                \PY{n}{r} \PY{o}{=} \PY{n}{api}\PY{o}{.}\PY{n}{get\PYZus{}champion\PYZus{}list}\PY{p}{(}\PY{p}{)}
+        
+            \PY{n+nb}{print}\PY{p}{(}\PY{n}{r}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+            \PY{k}{for} \PY{n}{champion} \PY{o+ow}{in} \PY{n}{r}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                \PY{n}{temp} \PY{o}{=} \PY{n}{r}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{n}{champion}\PY{p}{]}
+                \PY{n}{c} \PY{o}{=} \PY{p}{[}\PY{n}{temp}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}\PY{n}{temp}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{]}
+                \PY{n}{writer} \PY{o}{=} \PY{n}{csv}\PY{o}{.}\PY{n}{writer}\PY{p}{(}\PY{n}{output}\PY{p}{,} \PY{n}{lineterminator}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{n}{writer}\PY{o}{.}\PY{n}{writerow}\PY{p}{(}\PY{n}{c}\PY{p}{)}
+            \PY{n}{output}\PY{o}{.}\PY{n}{close}\PY{p}{(}\PY{p}{)}
+        
+        
+        \PY{k}{def} \PY{n+nf}{scrape\PYZus{}match\PYZus{}data}\PY{p}{(}\PY{n}{api\PYZus{}key}\PY{p}{)}\PY{p}{:}
+            \PY{n}{csvfile} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{match\PYZus{}data2.csv}\PY{l+s+s1}{\PYZsq{}}
+            \PY{n}{matches} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            \PY{n}{searched\PYZus{}matches} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            \PY{n}{accounts} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            \PY{n}{searched\PYZus{}accounts} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            \PY{n}{count} \PY{o}{=} \PY{l+m+mi}{0}
+        
+            \PY{n}{accounts}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{32639237}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+            \PY{n}{api} \PY{o}{=} \PY{n}{RiotAPI}\PY{p}{(}\PY{n}{api\PYZus{}key}\PY{p}{)}
+        
+            \PY{k}{while} \PY{n}{accounts}\PY{p}{:}
+                \PY{n}{nextAccount} \PY{o}{=} \PY{n}{accounts}\PY{o}{.}\PY{n}{pop}\PY{p}{(}\PY{p}{)}
+                \PY{n}{r} \PY{o}{=} \PY{n}{api}\PY{o}{.}\PY{n}{get\PYZus{}matchlist}\PY{p}{(}\PY{n}{nextAccount}\PY{p}{)}
+                \PY{k}{while} \PY{n}{r} \PY{o+ow}{is} \PY{k+kc}{None} \PY{o+ow}{or} \PY{n}{r}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{matches}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{o+ow}{is} \PY{k+kc}{None}\PY{p}{:}
+                    \PY{n}{time}\PY{o}{.}\PY{n}{sleep}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}
+                    \PY{c+c1}{\PYZsh{}nextAccount = accounts.pop()}
+                    \PY{n}{r} \PY{o}{=} \PY{n}{api}\PY{o}{.}\PY{n}{get\PYZus{}matchlist}\PY{p}{(}\PY{n}{nextAccount}\PY{p}{)}
+        
+                \PY{n}{searched\PYZus{}accounts}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{nextAccount}\PY{p}{)}
+        
+                \PY{k}{for} \PY{n}{match} \PY{o+ow}{in} \PY{n}{r}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{matches}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                    \PY{k}{if} \PY{n}{match}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{platformId}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{==}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NA1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                        \PY{n}{Id} \PY{o}{=} \PY{n}{match}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gameId}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                        \PY{k}{if} \PY{n}{Id} \PY{o+ow}{not} \PY{o+ow}{in} \PY{n}{searched\PYZus{}matches}\PY{p}{:}
+                            \PY{n}{matches}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{Id}\PY{p}{)}
+                \PY{n}{random}\PY{o}{.}\PY{n}{shuffle}\PY{p}{(}\PY{n}{matches}\PY{p}{)}
+        
+                \PY{n}{output} \PY{o}{=} \PY{n+nb}{open}\PY{p}{(}\PY{n}{csvfile}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{while} \PY{n}{matches}\PY{p}{:}
+                    \PY{n}{nextMatch} \PY{o}{=} \PY{n}{matches}\PY{o}{.}\PY{n}{pop}\PY{p}{(}\PY{p}{)}
+                    \PY{n}{searched\PYZus{}matches}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{nextMatch}\PY{p}{)}
+                    \PY{n}{count}\PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}
+                    \PY{n+nb}{print}\PY{p}{(}\PY{n}{count}\PY{p}{)}
+        
+                    \PY{n}{r} \PY{o}{=} \PY{n}{api}\PY{o}{.}\PY{n}{get\PYZus{}match}\PY{p}{(}\PY{n}{nextMatch}\PY{p}{)}
+                    \PY{k}{while} \PY{n}{r} \PY{o+ow}{is} \PY{k+kc}{None} \PY{o+ow}{or} \PY{n}{r}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{participantIdentities}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{o+ow}{is} \PY{k+kc}{None}\PY{p}{:}
+                        \PY{n}{time}\PY{o}{.}\PY{n}{sleep}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}
+                        \PY{n}{r} \PY{o}{=} \PY{n}{api}\PY{o}{.}\PY{n}{get\PYZus{}match}\PY{p}{(}\PY{n}{nextMatch}\PY{p}{)}
+        
+                    \PY{k}{for} \PY{n}{player} \PY{o+ow}{in} \PY{n}{r}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{participantIdentities}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                        \PY{n}{accountId} \PY{o}{=} \PY{n}{player}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{player}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{currentAccountId}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                        \PY{k}{if} \PY{n}{accountId} \PY{o+ow}{not} \PY{o+ow}{in} \PY{n}{searched\PYZus{}accounts}\PY{p}{:}
+                            \PY{n}{accounts}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{accountId}\PY{p}{)}
+                    \PY{n}{random}\PY{o}{.}\PY{n}{shuffle}\PY{p}{(}\PY{n}{accounts}\PY{p}{)}
+        
+                    \PY{n}{winning\PYZus{}champions} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                    \PY{n}{losing\PYZus{}champions} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                    \PY{k}{for} \PY{n}{player} \PY{o+ow}{in} \PY{n}{r}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{participants}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                        \PY{n}{win} \PY{o}{=} \PY{n}{player}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{stats}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{win}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                        \PY{n}{champion} \PY{o}{=} \PY{n}{player}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{championId}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+                        \PY{k}{if} \PY{n}{win} \PY{o}{==} \PY{k+kc}{True}\PY{p}{:}
+                            \PY{n}{winning\PYZus{}champions}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{champion}\PY{p}{)}
+                        \PY{k}{else}\PY{p}{:}
+                            \PY{n}{losing\PYZus{}champions}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{champion}\PY{p}{)}
+                    \PY{n}{game} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                    \PY{k}{for} \PY{n}{winners} \PY{o+ow}{in} \PY{n}{winning\PYZus{}champions}\PY{p}{:}
+                        \PY{n}{game}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{winners}\PY{p}{)}
+                    \PY{k}{for} \PY{n}{losers} \PY{o+ow}{in} \PY{n}{losing\PYZus{}champions}\PY{p}{:}
+                        \PY{n}{game}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{losers}\PY{p}{)}
+        
+                    \PY{n+nb}{print}\PY{p}{(}\PY{n}{game}\PY{p}{)}
+        
+                    \PY{n}{writer} \PY{o}{=} \PY{n}{csv}\PY{o}{.}\PY{n}{writer}\PY{p}{(}\PY{n}{output}\PY{p}{,}\PY{n}{lineterminator}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                    \PY{n}{writer}\PY{o}{.}\PY{n}{writerow}\PY{p}{(}\PY{n}{game}\PY{p}{)}
+                \PY{n}{output}\PY{o}{.}\PY{n}{close}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    The data for this project was collected on April 12, 2018, during patch
+8.7. I limited my data to certain parameters: firstly, the data gathered
+is only for the ranked 5v5 gamemode. This is one of the most played
+gamemodes, so I wanted to focus my data and ignore how champions were
+doing in other more obscure gamemodes. Additionally, I gathered data for
+the highest ranked games (ranked Diamond+) so that all of the players
+would be top players in their region. These players would have a
+relatively strong understanding of how to play the game, and would the
+similar skill levels would minimize the effects any external variables
+and maximize the influence of each individual champion on the game, or
+at least attempt to. It was gathered in the format of 10 columns:
+winning champion1, winning champion2, winning champion3, winning
+champion4, winning champion5, losing champion1, losing champion2, losing
+champion3, losing champion4, losing champion5. Below is a preview of the
+scraped raw data. See Matches\_Raw sheet in data/league\_ds.xlsx for
+full raw data.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c+c1}{\PYZsh{} scraped raw data:}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{from} \PY{n+nn}{IPython}\PY{n+nn}{.}\PY{n+nn}{display} \PY{k}{import} \PY{n}{display}
+        
+        \PY{n}{raw} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}excel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data/league\PYZus{}ds.xlsx}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{sheet\PYZus{}name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Matches\PYZus{}Raw}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{display}\PY{p}{(}\PY{n}{raw}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+   champ1_win  champ2_win  champ3_win  champ4_win  champ5_win  champ1_lose  \
+0          38          96          25         150          19           24   
+1          20         240          40          81         131            1   
+2         432          38         121         498          54           33   
+3          37          14          19         498         157           28   
+4          40          24         240         105          81          141   
+
+   champ2_lose  champ3_lose  champ4_lose  champ5_lose  
+0          432          145          136           14  
+1          202            2           80           13  
+2           81           35           14          142  
+3          412           91           17           67  
+4           14          202           37            8  
+    \end{verbatim}
+
+    
+    The data collected had to be processed for the preliminary analysis.
+Champions were originally stored as int, under a unique championId key,
+so I had to pull the list of champions and their respective championIds
+using the LOL-STATIC-DATA\_V3 method (see Champions\_Raw sheet in
+data/league\_ds.xlsx for championId legend). I decided to rename the
+columns to: TeamA champion1, TeamA champion2, TeamA champion3, TeamA
+champion4, TeamA champion5, TeamB champion1, TeamB champion2, TeamB
+champion3, TeamB champion4, TeamB champion5. I then added a final
+boolean column, TeamA\_Victory, and set it as true for all the data I
+collected, so that there was a more definitive variable my model would
+try to predict.
+
+I also decided to then expand my data by switching the champions on each
+team for each dataset (TeamA became TeamB, and vice versa) and set
+TeamA\_Victory to false. This effectively doubles my dataset in size
+when I am ready to train my model. This also ensures that all of my data
+do not have the label of true for TeamA\_Victory, so that a machine
+learning algorithm would not be able to simply predict "true" for every
+game and be able to accurately predict the outcome of a game. In total,
+I ended up with about 68,000 rows. Below is a preview of the processed
+data. See Matches\_Processed sheet in league\_ds for full processed
+data.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{processed} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}excel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data/league\PYZus{}ds.xlsx}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{sheet\PYZus{}name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Matches\PYZus{}Processed}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{display}\PY{p}{(}\PY{n}{processed}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+   TeamA_Champion1  TeamA_Champion2  TeamA_Champion3  TeamA_Champion4  \
+0               38               96               25              150   
+1               20              240               40               81   
+2              432               38              121              498   
+3               37               14               19              498   
+4               40               24              240              105   
+
+   TeamA_Champion5  TeamB_Champion1  TeamB_Champion2  TeamB_Champion3  \
+0               19               24              432              145   
+1              131                1              202                2   
+2               54               33               81               35   
+3              157               28              412               91   
+4               81              141               14              202   
+
+   TeamB_Champion4  TeamB_Champion5  TeamA_Victory  
+0              136               14           True  
+1               80               13           True  
+2               14              142           True  
+3               17               67           True  
+4               37                8           True  
+    \end{verbatim}
+
+    
+    \section{Data Exploration}\label{data-exploration}
+
+    From the collected raw data, I was able to sum the total number of games
+each champion was played in, as well as total the number of games each
+champion was on the winning team. Play rate is calculated by dividing a
+champion's total number of games played by the total number of games
+gathered after preprocessing, which is 34,152 (See PlayRate\_Sorted
+sheet in data/league\_ds.xlsx). Win rate is then calculated by dividing
+a champion's total number of games won by total number of games played
+(WinRate\_Sorted sheet). Thus, I procured the following charts (charts
+with abbreviated axes below, see full charts in Charts sheet in
+data/league\_ds.xlsx):
+
+\(\text{Play Rate} = \dfrac{\text{Number of Games Played}}{\text{Total Number of Games}}\)
+
+\(\text{Win Rate} = \dfrac{\text{Number of Games Won}}{\text{Number of Games Played}}\)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{k+kn}{from} \PY{n+nn}{IPython}\PY{n+nn}{.}\PY{n+nn}{display} \PY{k}{import} \PY{n}{Image}
+        
+        \PY{n}{display}\PY{p}{(}\PY{n}{Image}\PY{p}{(}\PY{n}{filename}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{images/playrate.png}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Fig1. Play Rates for Champions}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{center}\PY{p}{(}\PY{l+m+mi}{83}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_12_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+                           Fig1. Play Rates for Champions                          
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{display}\PY{p}{(}\PY{n}{Image}\PY{p}{(}\PY{n}{filename}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{images/winrate.png}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Fig2. Win Rates for Champions}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{center}\PY{p}{(}\PY{l+m+mi}{83}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_13_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+                           Fig2. Win Rates for Champions                           
+
+    \end{Verbatim}
+
+    My initial impressions are that there are no glaring outliers, and that
+the data I collected is valid. Most of the play rates hover around 5\%,
+with a few more popular champions. Most of the win rates are also
+between 45\%-55\%. It was interesting to find Gragas had a terribly low
+win rate at 43.53\%. After seeing these numbers, I thought it would be
+interesting to compare these total numbers:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{display}\PY{p}{(}\PY{n}{Image}\PY{p}{(}\PY{n}{filename}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{images/total.png}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Fig3. Games Won from Total Games Played}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{center}\PY{p}{(}\PY{l+m+mi}{83}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_15_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+                      Fig3. Games Won from Total Games Played                      
+
+    \end{Verbatim}
+
+    This gave a more informed perspective on how many games each champion
+were actually winning and losing comparatively.
+
+I then wanted to look at which champs were played the most and which
+champs won the most, so I sorted these numbers by their rank and
+generated the following:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{display}\PY{p}{(}\PY{n}{Image}\PY{p}{(}\PY{n}{filename}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{images/normalizedplayrate.png}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Fig4. Champions Sorted by Play Rate}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{center}\PY{p}{(}\PY{l+m+mi}{83}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_17_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+                        Fig4. Champions Sorted by Play Rate                        
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{n}{display}\PY{p}{(}\PY{n}{Image}\PY{p}{(}\PY{n}{filename}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{images/normalizedwinrate.png}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Fig5. Champions Sorted by Win Rate}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{center}\PY{p}{(}\PY{l+m+mi}{83}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_18_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+                         Fig5. Champions Sorted by Win Rate                        
+
+    \end{Verbatim}
+
+    For play rate, I compared each champion's play rate to the baseline
+probability of a champion being played if all champions were picked
+randomly, which is \({139 \choose 9}/{140 \choose 10} = {7.143}\%\), and
+then calculated the difference with each champion's play rate. Thus, the
+above graph is interpreted as Janna is played at a rate of about
+\(+20\%\) higher than \(7.143\%\), or \(37\%\), and Ahri is played at
+approximately the baseline of \(7.143\%\). The chart for win rate was
+easier to normalize, because the baseline win rate is 50\%.
+Interestingly enough, champions like Aurelion Sol and Gragas have a
+difference in winrates of more than \(10\%\).
+
+    \section{Next Steps}\label{next-steps}
+
+    As I mentioned previously, the overall goal of my project is to be able
+to predict whether TeamA will win or lose, given the champions selected
+for TeamA and TeamB. While ChampionIds are integers, I will need to
+treat this data as categorical data. Additionally, the specific order of
+champions on a team does not necessarily matter, so my ``problem''
+requires essentially two inputs: both a set of 5 categorical variables.
+My initial thoughts are that I am going to need to find a way to
+represent each team in an ``orderless'' manner -- in other words, I
+should not use five independent variables for a team, but instead I
+should somehow be able to represent five champions as one cohesive set.
+For these reasons, I do not believe the best course of action is to use
+the data as ordinal data. ChampionId is defined by Riot, and it may not
+be the case that Annie (ChampionId 1) is severely different from Illaoi
+(420) and Rek'Sai (421).
+
+The best approach would be to employ One Hot Encoding. Thus, I would
+transform the 5 columns representing TeamA's champions into 140 columns
+for 140 champions -- the cells corresponding to the team's champions
+would be 1, while the others will be 0. A similar transformation would
+be applied to TeamB, effectively making each row 140+140 variables + 1
+classification = 281 columns. I can then use logistic regression to try
+to find the appropriate weights for the 280 variables in attempts to
+classify each match as a TeamA victory or TeamB victory. With this high
+dimensionality, I am expecting the model's training to require
+substantial time and memory. I also have to be careful not to over fit
+my model to the data -- I will be appropriately cross-validating my
+model across my vast data set. Additionally, it is worth noting that
+this specific model may not work in the future if new champions are
+added to the game, though a similar model can be trained if more data is
+collected with the new champion.
+
+    \section{Preparing the Data}\label{preparing-the-data}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{c+c1}{\PYZsh{} Data needs to be transformed from categorical to quantitative}
+        \PY{c+c1}{\PYZsh{} One\PYZhy{}Hot Encoding originally done in excel, saved to data/OHE\PYZus{}csv.csv}
+        
+        \PY{n}{data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data/OHE\PYZus{}csv.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{n}{display}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}TeamA\PYZus{}1 \PYZhy{} 1 if championId 1 is on team A, 0 otherwise}
+        \PY{c+c1}{\PYZsh{}TeamB\PYZus{}1 \PYZhy{} 1 if championId 1 is on team B, 0 otherwise}
+        \PY{c+c1}{\PYZsh{}TEamA\PYZus{}Victory \PYZhy{} 1 if TeamA is the winner of the game, 0 otherwise}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+   TeamA_1  TeamA_2  TeamA_3  TeamA_4  TeamA_5  TeamA_6  TeamA_7  TeamA_8  \
+0        0        0        0        0        0        0        0        0   
+1        0        0        0        0        0        0        0        0   
+2        0        0        0        0        0        0        0        0   
+3        0        0        0        0        0        0        0        0   
+4        0        0        0        0        0        0        0        0   
+
+   TeamA_9  TeamA_10      ...        TeamB_412  TeamB_420  TeamB_421  \
+0        0         0      ...                0          0          0   
+1        0         0      ...                0          0          0   
+2        0         0      ...                0          0          0   
+3        0         0      ...                1          0          0   
+4        0         0      ...                0          0          0   
+
+   TeamB_427  TeamB_429  TeamB_432  TeamB_497  TeamB_498  TeamB_516  \
+0          0          0          1          0          0          0   
+1          0          0          0          0          0          0   
+2          0          0          0          0          0          0   
+3          0          0          0          0          0          0   
+4          0          0          0          0          0          0   
+
+   TeamA_Victory  
+0              1  
+1              1  
+2              1  
+3              1  
+4              1  
+
+[5 rows x 281 columns]
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{num\PYZus{}games} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+        \PY{c+c1}{\PYZsh{}total 68302 games, 34151 games before data expansion}
+        
+        \PY{n}{num\PYZus{}features} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}
+        \PY{c+c1}{\PYZsh{}280 features, 140 champions per team}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Total number of matches: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{num\PYZus{}games}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Number of features: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{num\PYZus{}features}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Total number of matches: 68302
+Number of features: 280
+
+    \end{Verbatim}
+
+    \section{Train Data}\label{train-data}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{c+c1}{\PYZsh{} Split Data into Training and Test Data}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{cross\PYZus{}validation} \PY{k}{import} \PY{n}{train\PYZus{}test\PYZus{}split}
+        
+        \PY{n}{features} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{TeamA\PYZus{}Victory}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{target} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{TeamA\PYZus{}Victory}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        
+        \PY{n}{x\PYZus{}train}\PY{p}{,} \PY{n}{x\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{features}\PY{p}{,} 
+                                                            \PY{n}{target}\PY{p}{,} 
+                                                            \PY{n}{test\PYZus{}size} \PY{o}{=} \PY{l+m+mf}{0.2}\PY{p}{,} 
+                                                            \PY{n}{random\PYZus{}state} \PY{o}{=} \PY{l+m+mi}{70}\PY{p}{,} 
+                                                            \PY{n}{stratify} \PY{o}{=} \PY{n}{target}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/Users/Justin/anaconda3/lib/python3.6/site-packages/sklearn/cross\_validation.py:41: DeprecationWarning: This module was deprecated in version 0.18 in favor of the model\_selection module into which all the refactored classes and functions are moved. Also note that the interface of the new CV iterators are different from that of this module. This module will be removed in 0.20.
+  "This module will be removed in 0.20.", DeprecationWarning)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{c+c1}{\PYZsh{} Define training and prediction methods}
+         \PY{k+kn}{from} \PY{n+nn}{time} \PY{k}{import} \PY{n}{time}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{f1\PYZus{}score}
+         
+         \PY{k}{def} \PY{n+nf}{train\PYZus{}classifier}\PY{p}{(}\PY{n}{clf}\PY{p}{,} \PY{n}{x\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}\PY{p}{:}
+         
+             \PY{n}{start} \PY{o}{=} \PY{n}{time}\PY{p}{(}\PY{p}{)}
+             \PY{n}{clf}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{x\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+             \PY{n}{end} \PY{o}{=} \PY{n}{time}\PY{p}{(}\PY{p}{)}
+         
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Time to train model: }\PY{l+s+si}{\PYZob{}:.4f\PYZcb{}}\PY{l+s+s2}{ seconds}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{end} \PY{o}{\PYZhy{}} \PY{n}{start}\PY{p}{)}\PY{p}{)}
+         
+         
+         \PY{c+c1}{\PYZsh{} returns calculated f1 score and accuracy}
+         \PY{k}{def} \PY{n+nf}{predict\PYZus{}labels}\PY{p}{(}\PY{n}{clf}\PY{p}{,} \PY{n}{features}\PY{p}{,} \PY{n}{target}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{}Makes predictions using a fit classifier based on F1 score.}
+         
+             \PY{n}{y\PYZus{}pred} \PY{o}{=} \PY{n}{clf}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{features}\PY{p}{)}
+             
+             \PY{k}{return} \PY{n}{f1\PYZus{}score}\PY{p}{(}\PY{n}{target}\PY{p}{,} \PY{n}{y\PYZus{}pred}\PY{p}{)}\PY{p}{,} \PY{n+nb}{sum}\PY{p}{(}\PY{n}{target} \PY{o}{==} \PY{n}{y\PYZus{}pred}\PY{p}{)} \PY{o}{/} \PY{n+nb}{float}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{y\PYZus{}pred}\PY{p}{)}\PY{p}{)}
+         
+         
+         \PY{k}{def} \PY{n+nf}{train\PYZus{}predict}\PY{p}{(}\PY{n}{clf}\PY{p}{,} \PY{n}{x\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{x\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{}Train and predict using a classifer based on F1 score.}
+             
+             \PY{c+c1}{\PYZsh{} Indicate the classifier and the training set size}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Training a }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ using a training set size of }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{. . .}\PY{l+s+s2}{\PYZdq{}}
+                   \PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{clf}\PY{o}{.}\PY{n+nv+vm}{\PYZus{}\PYZus{}class\PYZus{}\PYZus{}}\PY{o}{.}\PY{n+nv+vm}{\PYZus{}\PYZus{}name\PYZus{}\PYZus{}}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{x\PYZus{}train}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         
+             \PY{n}{train\PYZus{}classifier}\PY{p}{(}\PY{n}{clf}\PY{p}{,} \PY{n}{x\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+             
+             \PY{n}{f1}\PY{p}{,} \PY{n}{acc} \PY{o}{=} \PY{n}{predict\PYZus{}labels}\PY{p}{(}\PY{n}{clf}\PY{p}{,} \PY{n}{x\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Training set F1 score and accuracy score: }\PY{l+s+si}{\PYZob{}:.4f\PYZcb{}}\PY{l+s+s2}{ , }\PY{l+s+si}{\PYZob{}:.4f\PYZcb{}}\PY{l+s+s2}{.}\PY{l+s+s2}{\PYZdq{}}
+                   \PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{f1} \PY{p}{,} \PY{n}{acc}\PY{p}{)}\PY{p}{)}
+             
+             \PY{n}{f1}\PY{p}{,} \PY{n}{acc} \PY{o}{=} \PY{n}{predict\PYZus{}labels}\PY{p}{(}\PY{n}{clf}\PY{p}{,} \PY{n}{x\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Test set F1 score and accuracy score: }\PY{l+s+si}{\PYZob{}:.4f\PYZcb{}}\PY{l+s+s2}{ , }\PY{l+s+si}{\PYZob{}:.4f\PYZcb{}}\PY{l+s+s2}{.}\PY{l+s+s2}{\PYZdq{}}
+                   \PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{f1} \PY{p}{,} \PY{n}{acc}\PY{p}{)}\PY{p}{)}
+             
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{c+c1}{\PYZsh{} First attempt Logistic Regression, Naive Bayes, and Random Forest Algorithms}
+         
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{linear\PYZus{}model} \PY{k}{import} \PY{n}{LogisticRegression}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{naive\PYZus{}bayes} \PY{k}{import} \PY{n}{GaussianNB}
+         \PY{k+kn}{import} \PY{n+nn}{xgboost} \PY{k}{as} \PY{n+nn}{xgb}
+         
+         \PY{n}{clf\PYZus{}A} \PY{o}{=} \PY{n}{LogisticRegression}\PY{p}{(}\PY{n}{random\PYZus{}state} \PY{o}{=} \PY{l+m+mi}{23}\PY{p}{)}
+         \PY{n}{clf\PYZus{}B} \PY{o}{=} \PY{n}{GaussianNB}\PY{p}{(}\PY{p}{)}
+         \PY{n}{clf\PYZus{}C} \PY{o}{=} \PY{n}{xgb}\PY{o}{.}\PY{n}{XGBClassifier}\PY{p}{(}\PY{n}{seed} \PY{o}{=} \PY{l+m+mi}{63}\PY{p}{)}
+         
+         \PY{n}{train\PYZus{}predict}\PY{p}{(}\PY{n}{clf\PYZus{}A}\PY{p}{,} \PY{n}{x\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{x\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{n}{train\PYZus{}predict}\PY{p}{(}\PY{n}{clf\PYZus{}B}\PY{p}{,} \PY{n}{x\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{x\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{n}{train\PYZus{}predict}\PY{p}{(}\PY{n}{clf\PYZus{}C}\PY{p}{,} \PY{n}{x\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{x\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Training a LogisticRegression using a training set size of 54641. . .
+Time to train model: 1.4196 seconds
+Training set F1 score and accuracy score: 0.5461 , 0.5452.
+Test set F1 score and accuracy score: 0.5289 , 0.5311.
+ 
+Training a GaussianNB using a training set size of 54641. . .
+Time to train model: 0.4038 seconds
+Training set F1 score and accuracy score: 0.5367 , 0.5364.
+Test set F1 score and accuracy score: 0.5256 , 0.5238.
+ 
+Training a XGBClassifier using a training set size of 54641. . .
+Time to train model: 43.0457 seconds
+Training set F1 score and accuracy score: 0.5659 , 0.5654.
+Test set F1 score and accuracy score: 0.5276 , 0.5300.
+ 
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/Users/Justin/anaconda3/lib/python3.6/site-packages/sklearn/preprocessing/label.py:151: DeprecationWarning: The truth value of an empty array is ambiguous. Returning False, but in future this will result in an error. Use `array.size > 0` to check that an array is not empty.
+  if diff:
+/Users/Justin/anaconda3/lib/python3.6/site-packages/sklearn/preprocessing/label.py:151: DeprecationWarning: The truth value of an empty array is ambiguous. Returning False, but in future this will result in an error. Use `array.size > 0` to check that an array is not empty.
+  if diff:
+
+    \end{Verbatim}
+
+    Unfortunately, all three algorithms were only \(2\%\) to \(3\%\) better
+than \(50\%\), which is only marginally better than a blind guessing
+approach. These are early signs that data on champions picked alone are
+not enough to accurately predict the outcome of games. There are many
+other varibles not considered in this analysis, and champions picked for
+each team may only have a tiny influence on the outcome each game.
+
+I decide to further tune the Logistic Regression model as it produced
+the best results in a rather short amount of time.
+
+    \section{Tuning Logistic Regression}\label{tuning-logistic-regression}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{c+c1}{\PYZsh{} Fine and select best Cost parameter}
+         
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{grid\PYZus{}search} \PY{k}{import} \PY{n}{GridSearchCV}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{make\PYZus{}scorer}
+         
+         \PY{c+c1}{\PYZsh{} Test various cost parameters for highest accuracy}
+         \PY{n}{C\PYZus{}param} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{C}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mf}{0.001}\PY{p}{,} \PY{l+m+mf}{0.005}\PY{p}{,} \PY{l+m+mf}{0.01}\PY{p}{,} \PY{l+m+mf}{0.05}\PY{p}{,} \PY{l+m+mf}{0.1}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{50}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{]}\PY{p}{,}
+                    \PY{p}{\PYZcb{}}
+         
+         \PY{c+c1}{\PYZsh{} Choose classifier A, Logistic Regression}
+         \PY{n}{f1\PYZus{}scorer} \PY{o}{=} \PY{n}{make\PYZus{}scorer}\PY{p}{(}\PY{n}{f1\PYZus{}score}\PY{p}{)}
+         
+         \PY{n}{grid\PYZus{}obj} \PY{o}{=} \PY{n}{GridSearchCV}\PY{p}{(}\PY{n}{clf\PYZus{}A}\PY{p}{,}
+                            \PY{n}{scoring}\PY{o}{=}\PY{n}{f1\PYZus{}scorer}\PY{p}{,}
+                            \PY{n}{param\PYZus{}grid}\PY{o}{=}\PY{n}{C\PYZus{}param}\PY{p}{,}
+                            \PY{n}{cv}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{)}
+         \PY{n}{grid\PYZus{}results} \PY{o}{=} \PY{n}{grid\PYZus{}obj}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{x\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Get the best estimator}
+         \PY{n}{clf} \PY{o}{=} \PY{n}{grid\PYZus{}results}\PY{o}{.}\PY{n}{best\PYZus{}estimator\PYZus{}}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{clf}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Report the final F1 score for training and testing after parameter tuning}
+         \PY{n}{f1}\PY{p}{,} \PY{n}{acc} \PY{o}{=} \PY{n}{predict\PYZus{}labels}\PY{p}{(}\PY{n}{clf}\PY{p}{,} \PY{n}{x\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{F1 score and accuracy score for training set: }\PY{l+s+si}{\PYZob{}:.4f\PYZcb{}}\PY{l+s+s2}{ , }\PY{l+s+si}{\PYZob{}:.4f\PYZcb{}}\PY{l+s+s2}{.}\PY{l+s+s2}{\PYZdq{}}
+               \PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{f1} \PY{p}{,} \PY{n}{acc}\PY{p}{)}\PY{p}{)}
+             
+         \PY{n}{f1}\PY{p}{,} \PY{n}{acc} \PY{o}{=} \PY{n}{predict\PYZus{}labels}\PY{p}{(}\PY{n}{clf}\PY{p}{,} \PY{n}{x\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{F1 score and accuracy score for test set: }\PY{l+s+si}{\PYZob{}:.4f\PYZcb{}}\PY{l+s+s2}{ , }\PY{l+s+si}{\PYZob{}:.4f\PYZcb{}}\PY{l+s+s2}{.}\PY{l+s+s2}{\PYZdq{}}
+               \PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{f1} \PY{p}{,} \PY{n}{acc}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/Users/Justin/anaconda3/lib/python3.6/site-packages/sklearn/grid\_search.py:42: DeprecationWarning: This module was deprecated in version 0.18 in favor of the model\_selection module into which all the refactored classes and functions are moved. This module will be removed in 0.20.
+  DeprecationWarning)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+LogisticRegression(C=0.01, class\_weight=None, dual=False, fit\_intercept=True,
+          intercept\_scaling=1, max\_iter=100, multi\_class='ovr', n\_jobs=1,
+          penalty='l2', random\_state=23, solver='liblinear', tol=0.0001,
+          verbose=0, warm\_start=False)
+F1 score and accuracy score for training set: 0.5453 , 0.5450.
+F1 score and accuracy score for test set: 0.5255 , 0.5284.
+
+    \end{Verbatim}
+
+    We use the GridSearchCV library to find the best parameter for our
+LogisticRegression using the F1 score over 5-fold validation.
+GridSearchCV returns the best parameter of C=0.01, but it seems our
+caluclated F1 value actually decreases for our original training and
+test set. Overall performance of the model, however, should have
+slightly improved as other training/test splits should have improved.
+Below, I calculate the confusion matrix for our slightly improved model.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{c+c1}{\PYZsh{} Construct Confusion Matrix}
+         
+         \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{2}
+         \PY{n}{matrix} \PY{o}{=} \PY{p}{[}\PY{p}{[}\PY{l+m+mi}{0} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{size}\PY{p}{)}\PY{p}{]} \PY{k}{for} \PY{n}{y} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{size}\PY{p}{)}\PY{p}{]}
+         \PY{n}{table} \PY{o}{=} \PY{p}{[}\PY{p}{[}\PY{l+m+mi}{0} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{size}\PY{p}{)}\PY{p}{]} \PY{k}{for} \PY{n}{y} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{size}\PY{p}{)}\PY{p}{]}
+         
+         \PY{n}{test\PYZus{}predictions} \PY{o}{=} \PY{n}{clf}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{x\PYZus{}test}\PY{p}{)}
+         
+         \PY{n}{count}\PY{o}{=}\PY{l+m+mi}{0}
+         \PY{k}{for} \PY{n}{each} \PY{o+ow}{in} \PY{n}{y\PYZus{}test}\PY{p}{:}
+             \PY{n}{actual} \PY{o}{=} \PY{n}{each}
+             \PY{n}{prediction} \PY{o}{=} \PY{n}{test\PYZus{}predictions}\PY{p}{[}\PY{n}{count}\PY{p}{]}
+             
+             \PY{n}{matrix}\PY{p}{[}\PY{n}{actual}\PY{p}{]}\PY{p}{[}\PY{n}{prediction}\PY{p}{]} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+             
+             \PY{n}{count} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+         
+         \PY{n}{table}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{n}{matrix}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+         \PY{n}{table}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{n}{matrix}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{table}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{n}{matrix}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+         \PY{n}{table}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{n}{matrix}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Confusion Matrix:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}    
+         \PY{n}{table\PYZus{}row\PYZus{}header} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Predicted Win}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Predicted Loss}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{table\PYZus{}column\PYZus{}header} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Actual Win}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Actual Loss}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{row\PYZus{}format} \PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}:\PYZgt{}15\PYZcb{}}\PY{l+s+s2}{\PYZdq{}} \PY{o}{*} \PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{table\PYZus{}row\PYZus{}header}\PY{p}{)} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{row\PYZus{}format}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{o}{*}\PY{n}{table\PYZus{}row\PYZus{}header}\PY{p}{)}\PY{p}{)}
+         \PY{k}{for} \PY{n}{team}\PY{p}{,} \PY{n}{row} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{table\PYZus{}column\PYZus{}header}\PY{p}{,} \PY{n}{table}\PY{p}{)}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{row\PYZus{}format}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{team}\PY{p}{,} \PY{o}{*}\PY{n}{row}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{accuracy} \PY{o}{=} \PY{p}{(}\PY{n}{matrix}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{+} \PY{n}{matrix}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)} \PY{o}{/} \PY{n+nb}{len}\PY{p}{(}\PY{n}{test\PYZus{}predictions}\PY{p}{)}
+         \PY{n}{precision} \PY{o}{=} \PY{p}{(}\PY{n}{matrix}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)} \PY{o}{/} \PY{p}{(}\PY{n}{matrix}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{+} \PY{n}{matrix}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+         \PY{n}{recall} \PY{o}{=} \PY{p}{(}\PY{n}{matrix}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)} \PY{o}{/} \PY{p}{(}\PY{n}{matrix}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{+} \PY{n}{matrix}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Accuracy: }\PY{l+s+si}{\PYZob{}:.5f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{accuracy}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Precision: }\PY{l+s+si}{\PYZob{}:.5f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{precision}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Recall: }\PY{l+s+si}{\PYZob{}:.5f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{recall}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Confusion Matrix:
+                 Predicted Win Predicted Loss
+     Actual Win           3567           3263
+    Actual Loss           3179           3652
+
+
+Accuracy: 0.52844
+Precision: 0.52876
+Recall: 0.52225
+
+    \end{Verbatim}
+
+    \section{Application}\label{application}
+
+    The ideal use of this model would be its application on real-time games.
+Currently, losses in the ranked game mode incur a deduction in a
+player's League Points (LP), which is a measure of one's rating. Players
+are able to exit games after champions are selected but before the game
+actually starts, resulting in the disbandment of the game as well as a
+lesser deducation in LP than if the player were to actually complete and
+lose the game. This action is called "dodging". So, if a player knows
+they will lose a game, it is strategic for them to dodge and receive the
+lesser penalty.
+
+A real-use application of this model would then be able to predict the
+outcome of a game while a user is waiting for the game to start. A user
+should be able to input the champions on both teams and receive
+feedback.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{c+c1}{\PYZsh{} Applies machine learning model to input data}
+         \PY{c+c1}{\PYZsh{} Outputs its prediction}
+         \PY{k}{def} \PY{n+nf}{predict\PYZus{}game}\PY{p}{(}\PY{n}{clf}\PY{p}{,} \PY{n}{Team\PYZus{}A}\PY{p}{,} \PY{n}{Team\PYZus{}B}\PY{p}{)}\PY{p}{:}
+             \PY{n}{champion\PYZus{}list} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data/champion\PYZus{}list.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{champion\PYZus{}list}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+         
+             \PY{n}{champions} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}\PY{n+nb}{zip}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n}{champion\PYZus{}list}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Champion\PYZus{}Name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+                                  \PY{p}{,}\PY{n+nb}{list}\PY{p}{(}\PY{n}{champion\PYZus{}list}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Champion\PYZus{}Id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         
+             \PY{n}{input\PYZus{}header} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n}{data}\PY{p}{)}
+             \PY{n}{input\PYZus{}header}\PY{o}{.}\PY{n}{remove}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{TeamA\PYZus{}Victory}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         
+             \PY{n}{game} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+             \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{Team\PYZus{}A}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{key1} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{TeamA\PYZus{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{champions}\PY{p}{[}\PY{n}{Team\PYZus{}A}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{key2} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{TeamB\PYZus{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{champions}\PY{p}{[}\PY{n}{Team\PYZus{}B}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{game}\PY{p}{[}\PY{n}{key1}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+                 \PY{n}{game}\PY{p}{[}\PY{n}{key2}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+         
+             \PY{n}{app\PYZus{}input} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{k}{for} \PY{n}{each} \PY{o+ow}{in} \PY{n}{input\PYZus{}header}\PY{p}{:}
+                 \PY{k}{if} \PY{n}{each} \PY{o+ow}{not} \PY{o+ow}{in} \PY{n}{game}\PY{p}{:}
+                     \PY{n}{app\PYZus{}input}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+                 \PY{k}{else}\PY{p}{:}
+                     \PY{n}{app\PYZus{}input}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}
+             \PY{n}{app\PYZus{}input} \PY{o}{=} \PY{p}{[}\PY{n+nb}{tuple}\PY{p}{(}\PY{n}{app\PYZus{}input}\PY{p}{)}\PY{p}{]}
+         
+             \PY{n}{predict\PYZus{}input} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{o}{.}\PY{n}{from\PYZus{}records}\PY{p}{(}\PY{n}{app\PYZus{}input}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{n}{input\PYZus{}header}\PY{p}{)}
+                     
+             \PY{n}{outcome} \PY{o}{=} \PY{n}{clf}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{predict\PYZus{}input}\PY{p}{)}
+             
+             \PY{k}{if} \PY{p}{(}\PY{n}{outcome}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Predicted outcome: Team\PYZus{}A Victory}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Predicted outcome: Team\PYZus{}A Defeat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}    
+             \PY{c+c1}{\PYZsh{}return outcome}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{c+c1}{\PYZsh{} Input Team A and Team B}
+         
+         \PY{c+c1}{\PYZsh{} Three examples of recently played games}
+         
+         \PY{c+c1}{\PYZsh{} Final game in the 2018 Spring Split Finals \PYZhy{}}
+         \PY{c+c1}{\PYZsh{} Professional Players in a Tournament}
+         \PY{c+c1}{\PYZsh{} Team\PYZus{}A (Win) \PYZhy{} Maokai, Skarner, Azir, Jhin, Braum}
+         \PY{c+c1}{\PYZsh{} Team\PYZus{}B (Lose) \PYZhy{} Gnar, Sejuani, Ryze, Caitlyn, Thresh}
+         
+         \PY{n}{Team\PYZus{}A} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Maokai}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Skarner}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Azir}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Jhin}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Braum}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{Team\PYZus{}B} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Gnar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sejuani}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Ryze}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Caitlyn}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Thresh}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{predict\PYZus{}game}\PY{p}{(}\PY{n}{clf}\PY{p}{,} \PY{n}{Team\PYZus{}A}\PY{p}{,} \PY{n}{Team\PYZus{}B}\PY{p}{)}
+             
+         
+         \PY{c+c1}{\PYZsh{}Competitive Ranked 5v5 Solo Queue}
+         \PY{c+c1}{\PYZsh{} Team\PYZus{}A (Lose) \PYZhy{} Malphite, LeeSin, Fizz, Jhin, Rakan}
+         \PY{c+c1}{\PYZsh{} Team\PYZus{}B (Win) \PYZhy{} Darius, Shaco, Diana, Draven, Karma}
+         
+         \PY{n}{Team\PYZus{}A} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Malphite}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Lee Sin}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fizz}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Jhin}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Rakan}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{Team\PYZus{}B} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Darius}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Shaco}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Diana}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Draven}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Karma}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{predict\PYZus{}game}\PY{p}{(}\PY{n}{clf}\PY{p}{,} \PY{n}{Team\PYZus{}A}\PY{p}{,} \PY{n}{Team\PYZus{}B}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Team\PYZus{}A Lose}
+         \PY{c+c1}{\PYZsh{} TTeam\PYZus{}B Win}
+         \PY{n}{Team\PYZus{}A} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{LeBlanc}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Leona}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mordekaiser}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Rek}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{Sai}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Kai}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{Sa}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{Team\PYZus{}B} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Jayce}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Caitlyn}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Graves}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Alistar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Karma}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{predict\PYZus{}game}\PY{p}{(}\PY{n}{clf}\PY{p}{,} \PY{n}{Team\PYZus{}A}\PY{p}{,} \PY{n}{Team\PYZus{}B}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Predicted outcome: Team\_A Victory
+Predicted outcome: Team\_A Defeat
+Predicted outcome: Team\_A Victory
+
+    \end{Verbatim}
+
+    In this small sample size of recent games, the model was successful in
+predicting the outcome of two out of three games, including the final
+game in the Finals match of the 2018 Spring Split.
+
+    \section{Related Works}\label{related-works}
+
+    K. A. Willoughby, Winning Games in Canadian Football: A Logistic
+Regression Analysis, The College Mathematics Journal 33 (2002), \#3.
+
+This paper details a very standard application of Logistic Regression to
+predict one of two outcomes: Team A wins or Team B wins, similar to
+problem my project tackles. Willoughby's approach, however, features
+quantitative data that are relative to a persistent professional team,
+like yardage and number of interceptions in previous games. For my
+project, we cannot calculate similar metrics because players do not play
+with the same players on the same team as they do in football, so the
+difference in the performance of our final models reflect greatly on the
+significance each respective's training data. In sports like football,
+many more variables between games are held constant. Each player plays
+on the same team, and each player more or less plays in the same
+position. The largest variance between the outcomes of these games can
+be accounted for by how the players on different teams play against each
+other. It helps the performance of models for these types of problems
+that this difference can directly be translated into one team's victory
+over the other.
+
+After coming to my results, I looked to other projects to see if more
+effective methods were found. I found a project by Jihan Yan
+(https://github.com/arilato/ranked\_prediction) that was moderately more
+successful than mine. Yan was able to achieve \(60\%\) accuracy as
+compared to my model's \(53\%\), but his model considered more than just
+champions selected. His model not only directly analyzed each champion's
+matchup measured by each champion's winrate versus its specific
+opponent, he also considered each player's personal stats. For my
+project, I wanted to avoid any player-specific data and only examine raw
+aspects of the game, so it is interesting to see that even with
+consideration of player skill, the best model can only accurately
+predict \(60\%\) of games.
+
+More about his project can be found here:
+https://hackernoon.com/league-of-legends-predicting-wins-in-champion-select-with-machine-learning-6496523a7ea7.
+
+DeepLeague (https://github.com/farzaa/DeepLeague) is an interesting
+project that extends beyond the reach of my project and looks into how
+games are played during them. In DeepLeague, computer vision is used to
+precisely track where each of the ten players are at all times. Each
+league game averages between 20-30 minutes, so there is an enormous
+amount of data available that can be collected pertaining to how
+successful teams exactly, down to the very specific pixel. If players
+are interested in learning how to actually play games well, instead of
+simply picking the correct champions to play, more advanced projects
+will apply these technologies to analyze winning playstyles and specific
+play movements. I imagine these types of projects to be extremely
+complex, yet solving them would also be very rewarding. Projects like
+these remind me of projects like AlphaGo. Go is much simpler than League
+of Legends in terms of the complexity space that contains each possible
+set of moves for each player, and it still was not until 2015 that
+computers were able to "solve" Go. I do not know if a game like League
+will ever be "solvable", but training a computer to be good at the game
+will definitely need to be able to analyze the movements of each player
+as done in DeepLeague.
+
+This project goes more into detail here:
+https://medium.com/@farzatv/deepleague-leveraging-computer-vision-and-deep-learning-on-the-league-of-legends-mini-map-giving-d275fd17c4e0.
+
+    \section{Conclusion}\label{conclusion}
+
+    Although I was not able to train a model that could reliably predict the
+outcome of games based off of champions alone, the overall results of
+the project provide valubable insight to the intricacies of the game.
+From my results, I come to the conclusion that the pure champions that
+make up each team have a smaller impact on each game than I had
+previously thought. Whereas there is a significant emphasis on the
+champion select phase of League of Legends, the performance of the
+champions picked are largely determined by the individual player that
+picks them. While there are stronger and weaker champions as seen by the
+disparity in win rates, it is ultimately how these champions are
+utilized in-game that influence the outcome of games, rather than the
+raw strengths of each champion.
+
+Despite the shortcomings of this project, I do still believe that it is
+possible to train a model that is reliable to a much higher degree.
+Future adaptations of this project will need to consider player-specific
+data, such as player rank, champion mastery, and other
+performance-specific data that provides more information as to how the
+player will execute the strengths and weakenesses of their champion. If
+I am to take this approach, I may need to adjust the goal of the project
+as the specific players on the enemy team are not revealed before the
+game starts. Thus, the future application will either need to only
+consider one team's players and employ more advance probabilistic
+models, or attempt to predict the outcome after the game starts and this
+information becomes available. While the former would be more useful, I
+imagine that design to be more difficult to accurately model.
+
+Furthermore, despite attempting to simply the problem as possible by
+considering only champions selected, due to the compelxity of the game,
+the data still ended up being high-dimensional with 280 features. I
+originally wanted to train a SVM, but even a linear SVM required too
+much time and computing power to train. In the future, I will need to
+employ dimension-reduction techniques like Principal Component Analysis
+or t-SNE. It also helps to use quantitative data. Despite the data for
+this project was extremely large (241 x 64,000), much of that data was
+empty 0s. Only 10 cells in each row were relevant to predicting the
+outcome that game, so dimension reduction techniques or more efficient
+data representations definitely could have been used.
+
+    \section{Acknowledgments}\label{acknowledgments}
+
+    External libraries used:
+
+pandas: (https://pandas.pydata.org/) open source, BSD-licensed library
+providing high-performance, easy-to-use data structures and data
+analysis tools for the Python programming language.
+
+sklearn: (http://scikit-learn.org/stable/) Split data into Training/Test
+sets, Logistic Regression, Gaussian Naive Bayes model, GridSearchCV, F1
+score,
+
+xgboost: (https://github.com/dmlc/xgboost) an open-source software
+library which provides the gradient boosting Python, Random Forest Model
+
+Riot API tutorial: (https://www.youtube.com/watch?v=0NycEiHOeX8) I used
+this tutorial to get me started with the Riot API. The backbone of my
+request method is modeled after what is done in this tutorial. However,
+I have implemented my own methods of crawling and tracking which matches
+have already been recorded for my data collection process.
+
+Ratelimit 1.4.1 (https://pypi.python.org/pypi/ratelimit) I used this
+external library to limit my requests to comply with Riot's rate limit
+of 100 requests per 120 seconds.
+
+Predicting the Winning Football Team:
+
+(https://github.com/llSourcell/Predicting\_Winning\_Teams/blob/master/Prediction.ipynb)
+I organized my project similarly to this one, especially in terms of
+training the model. This project had a similar goal to my project,
+however this one used originally quantitative data.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
